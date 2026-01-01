@@ -3,40 +3,10 @@ import DiaryCard from "@/components/DiaryCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import studyImage from "@assets/generated_images/Study_desk_daily_life_8c144379.png";
-import cafeImage from "@assets/generated_images/Cafe_moment_daily_life_c665904d.png";
-import cherryImage from "@assets/generated_images/Cherry_blossom_park_scene_b0b95d1f.png";
+import { diaries } from "@/data/content";
 
 export default function Home() {
-  const recentDiaries = [
-    {
-      id: "1",
-      title: "充實的讀書日",
-      excerpt: "今天在圖書館度過了一整天，準備期末考試。雖然很累，但看著筆記本上滿滿的重點，覺得很有成就感。陽光透過窗戶灑進來，整個人都充滿了能量。",
-      date: "2025-11-05",
-      image: studyImage,
-      tags: ["學習", "日常"],
-      mood: "😊",
-    },
-    {
-      id: "2",
-      title: "咖啡廳的午後",
-      excerpt: "找到一家超棒的咖啡廳！拿鐵的拉花好漂亮，蛋糕也很好吃。坐在窗邊看著街上的人來人往，感覺時間都慢了下來。",
-      date: "2025-11-03",
-      image: cafeImage,
-      tags: ["咖啡", "放鬆"],
-      mood: "☕",
-    },
-    {
-      id: "3",
-      title: "櫻花盛開的公園",
-      excerpt: "趁著週末去公園賞櫻，粉色的花瓣隨風飄落，真的太美了！拍了好多照片，春天真的是最浪漫的季節。",
-      date: "2025-10-28",
-      image: cherryImage,
-      tags: ["旅行", "攝影", "春天"],
-      mood: "🌸",
-    },
-  ];
+  const recentDiaries = diaries.slice(0, 3);
 
   return (
     <div className="space-y-12">
@@ -58,7 +28,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {recentDiaries.map((diary) => (
-            <DiaryCard key={diary.id} {...diary} />
+            <DiaryCard key={diary.id} diary={diary} />
           ))}
         </div>
       </section>
