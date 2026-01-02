@@ -1,8 +1,12 @@
+"use client";
+
+import { useRef } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Cake, Heart } from "lucide-react";
 import profileAvatar from "@assets/generated_images/Anime_style_profile_avatar_4dd60992.png";
+import useAvatar from "@/hooks/use-avatar";
 
 export default function ProfileCard() {
   return (
@@ -10,14 +14,7 @@ export default function ProfileCard() {
       <div className="h-24 bg-gradient-to-r from-primary via-accent to-primary" />
       
       <CardHeader className="relative pb-4">
-        <div className="flex flex-col items-center -mt-16">
-          <Avatar className="w-24 h-24 border-4 border-card shadow-xl">
-            <AvatarImage src={profileAvatar} alt="陳玄暐" />
-            <AvatarFallback>陳玄暐</AvatarFallback>
-          </Avatar>
-          <h2 className="text-2xl font-bold mt-4">陳玄暐</h2>
-          <p className="text-muted-foreground">@陳玄暐</p>
-        </div>
+        <ProfileAvatar defaultUrl={profileAvatar} />
       </CardHeader>
 
       <CardContent className="space-y-6">
@@ -70,5 +67,63 @@ export default function ProfileCard() {
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+function ProfileAvatar({ defaultUrl }: { defaultUrl?: string }) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { avatarUrl, uploadFile, setAvatarUrl } = useAvatar(defaultUrl);
+
+  return (
+    <div className="flex flex-col items-center -mt-16">
+      <div className="relative">
+        <Avatar className="w-24 h-24 border-4 border-card shadow-xl">
+          <AvatarImage src={avatarUrl ?? defaultUrl} alt="陳玄暐" />
+          <AvatarFallback>陳玄暐</AvatarFallback>
+        </Avatar>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={async (e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            try {
+              await uploadFile(file);
+            } catch (err) {
+              // ignore
+            }
+          }}
+        />
+      </div>
+
+      <h2 className="text-2xl font-bold mt-4">陳玄暐</h2>
+      <p className="text-muted-foreground">@陳玄暐</p>
+
+      <div className="mt-2 flex gap-2 text-xs">
+        <button
+          className="underline text-sm"
+          onClick={() => inputRef.current?.click()}
+        >
+          上傳頭像
+        </button>
+        <button
+          className="underline text-sm"
+          onClick={() => {
+            const url = window.prompt("輸入圖片網址 (HTTPS)", "");
+            if (url) setAvatarUrl(url);
+          }}
+        >
+          使用網址
+        </button>
+        <button
+          className="underline text-sm"
+          onClick={() => setAvatarUrl(defaultUrl)}
+        >
+          還原
+        </button>
+      </div>
+    </div>
   );
 }
