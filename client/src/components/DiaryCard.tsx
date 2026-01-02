@@ -3,23 +3,22 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Heart } from "lucide-react";
 import { Link } from "wouter";
 
+import type { Diary } from "@/types/content";
+
 interface DiaryCardProps {
-  id: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  image: string;
-  tags: string[];
-  mood?: string;
+  diary: Diary;
 }
 
-export default function DiaryCard({ id, title, excerpt, date, image, tags, mood }: DiaryCardProps) {
+export default function DiaryCard({ diary }: DiaryCardProps) {
+  const { id, slug, title, date, tags, mood, imageUrl, content } = diary;
+  const excerpt = content.substring(0, 150) + "...";
+  
   return (
-    <Link href={`/diary/${id}`}>
+    <Link href={`/diary/${slug}`}>
       <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-1 h-full flex flex-col" data-testid={`card-diary-${id}`}>
         <div className="aspect-video overflow-hidden">
           <img
-            src={image}
+            src={imageUrl}
             alt={title}
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           />
