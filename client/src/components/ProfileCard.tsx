@@ -12,11 +12,11 @@ export default function ProfileCard() {
       <CardHeader className="relative pb-4">
         <div className="flex flex-col items-center -mt-16">
           <Avatar className="w-24 h-24 border-4 border-card shadow-xl">
-            <AvatarImage src={profileAvatar} alt="小明" />
-            <AvatarFallback>小明</AvatarFallback>
+            <AvatarImage src={profileAvatar} alt="陳玄暐" />
+            <AvatarFallback>陳玄暐</AvatarFallback>
           </Avatar>
-          <h2 className="text-2xl font-bold mt-4">小明</h2>
-          <p className="text-muted-foreground">@xiaoming_daily</p>
+          <h2 className="text-2xl font-bold mt-4">陳玄暐</h2>
+          <p className="text-muted-foreground">@陳玄暐</p>
         </div>
       </CardHeader>
 

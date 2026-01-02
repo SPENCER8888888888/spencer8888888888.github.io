@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Heart, Star } from "lucide-react";
+import { Sparkles, Heart, Star, BookOpen, Image as ImageIcon } from "lucide-react";
+import { Link } from "wouter";
 import profileAvatar from "@assets/generated_images/Anime_style_profile_avatar_4dd60992.png";
 import heroBg from "@assets/generated_images/Anime_hero_background_gradient_0f6ff2e1.png";
 
@@ -26,40 +27,44 @@ export default function HeroSection() {
 
       <div className="relative z-10 flex flex-col items-center justify-center py-20 px-4 text-white">
         <Avatar className="w-32 h-32 border-4 border-white shadow-xl mb-6">
-          <AvatarImage src={profileAvatar} alt="個人頭像" />
-          <AvatarFallback>小明</AvatarFallback>
+          <AvatarImage src={profileAvatar} alt="陳玄暐" />
+          <AvatarFallback>陳玄暐</AvatarFallback>
         </Avatar>
 
         <h1 className="text-5xl font-bold mb-4 text-center drop-shadow-lg">
-          嗨！我是小明
+          嗨！我是陳玄暐
         </h1>
         <p className="text-xl mb-8 text-center max-w-2xl drop-shadow-md text-white/95">
           一個熱愛生活、喜歡記錄日常的學生 ✨
         </p>
 
         <div className="flex gap-4">
-          <Button
-            variant="outline"
-            size="lg"
-            className="bg-white/20 backdrop-blur-sm border-white/40 text-white hover:bg-white/30"
-            data-testid="button-view-diary"
-          >
-            <BookOpen className="w-5 h-5 mr-2" />
-            查看日記
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="bg-white/20 backdrop-blur-sm border-white/40 text-white hover:bg-white/30"
-            data-testid="button-view-gallery"
-          >
-            <ImageIcon className="w-5 h-5 mr-2" />
-            生活相簿
-          </Button>
+          <Link href="/diary">
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-white/20 backdrop-blur-sm border-white/40 text-white hover:bg-white/30"
+              data-testid="button-view-diary"
+            >
+              <BookOpen className="w-5 h-5 mr-2" />
+              查看日記
+            </Button>
+          </Link>
+
+          <Link href="/gallery">
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-white/20 backdrop-blur-sm border-white/40 text-white hover:bg-white/30"
+              data-testid="button-view-gallery"
+            >
+              <ImageIcon className="w-5 h-5 mr-2" />
+              生活相簿
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-import { BookOpen, Image as ImageIcon } from "lucide-react";

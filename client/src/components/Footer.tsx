@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>Made with</span>
             <Heart className="w-4 h-4 text-primary fill-primary" />
-            <span>by 小明</span>
+            <span>by 陳玄暐</span>
           </div>
           <p className="text-sm text-muted-foreground text-center">
             © 2025 我的日常部落格. 記錄生活中的每一個美好瞬間
